@@ -1,0 +1,68 @@
+---
+title: "genai_feb11"
+format: pdf
+editor: visual
+---
+
+```{r, echo = FALSE, message=FALSE}
+library(tidyverse)
+library(stringr)
+```
+
+```{r, echo = FALSE}
+# change the colors for TSL style
+
+cols <- c("Bans All Use" = "#ABB4DE", "Allows Use With Conditions"= "#697AC3", "Instructor Decides"= "#4F62B8", "Undecided/Unclear"= "#2F3B75")
+
+b_w <- c("Bans All Use" = "#666666", "Allows Use With Conditions"= "#666666", "Instructor Decides"= "#999999", "Undecided/Unclear"= "#CCCCCC")
+
+policy <- data.frame(Policy = c("Bans All Use", "Instructor Decides", "Allows Use With Conditions", "Undecided/Unclear"),
+           Count = c(0, 57, 10, 37),
+           order = c(1, 3, 2, 4))
+```
+
+```{r, echo = FALSE}
+# ONLINE VERSION IN COLOR
+
+# the geom_text adds the count value on top of each column
+# n = 104 cause there are ties in the US News Ranking...
+# Can change the figure size - this is just for the render for a higher quality image
+
+
+policy %>%
+  ggplot(aes(x = reorder(Policy, order), y = Count, fill = Policy)) +
+  geom_col() +
+#  geom_text(aes(label = Count), vjust = -0.5) +
+  scale_x_discrete(labels = function(x) str_wrap(x, width = 20)) +
+  scale_fill_manual(values = cols, name = "Cylinders") +
+  theme_minimal() +
+  theme(legend.position = "none",
+        axis.title.x = element_text(margin = margin(t = 15)),
+        axis.title.y = element_text(margin = margin(r = 10)),
+        text = element_text(family = "Palatino")) +
+  labs(x = "Institution Policy", y = "Number of Universities", title = "Institution-Wide AI Policy at Top 100 US Universities")
+```
+
+```{r}
+# PRINT VERSION IN B&W
+
+# the geom_text adds the count value on top of each column
+# n = 104 cause there are ties in the US News Ranking...
+# Can change the figure size - this is just for the render for a higher quality image
+
+
+policy %>%
+  ggplot(aes(x = reorder(Policy, order), y = Count, fill = Policy)) +
+  geom_col() +
+#  geom_text(aes(label = Count), vjust = -0.5) +
+  scale_x_discrete(labels = function(x) str_wrap(x, width = 20)) +
+  scale_fill_manual(values = b_w, name = "Cylinders") +
+  theme_minimal() +
+  theme(legend.position = "none",
+        axis.title.x = element_text(margin = margin(t = 15)),
+        axis.title.y = element_text(margin = margin(r = 10)),
+        panel.grid.major = element_blank(),
+        panel.grid.minor = element_blank(),
+        text = element_text(family = "Palatino")) +
+  labs(x = "Institution Policy", y = "Number of Universities", title = "Institution-Wide AI Policy at Top 100 US Universities")
+```
