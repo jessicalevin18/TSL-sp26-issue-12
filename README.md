@@ -3,3 +3,5 @@
 ### Professor AI Policy Article
 #### Comment and Source:
 Institution-Wide AI Policy at Top 100 U.S. Universities. Source: Journal of Computers & Education: Artificial Intelligence (Figure by Evelyn Hao • The Student Life)
+
+https://www.sciencedirect.com/science/article/pii/S2666920X25001365#sec5
